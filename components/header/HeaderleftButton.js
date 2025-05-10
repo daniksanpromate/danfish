@@ -3,6 +3,7 @@ import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
+  withClamp,
   withSpring,
 } from 'react-native-reanimated';
 import {Pressable} from 'react-native';
@@ -15,7 +16,7 @@ export const Button = ({action, style, children}: ButtonProps) => {
       transform: [
         {translateX: 0},
         {translateY: 0},
-        {scale: withSpring(isPressed.value ? 2 : 1)},
+        {scale: withClamp({ min: -1, max: 1 }, withSpring(isPressed.value ? 10 : 1)) },
       ],
     };
   });
